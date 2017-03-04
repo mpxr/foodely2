@@ -1,0 +1,19 @@
+{
+  "name": "foodely2",
+  "version": "1.0.0",
+  "description": "foodely2",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.15.0",
+    "body-parser": "^1.15.1",
+    "ejs": "^2.4.1",
+    "express-session": "^1.13.0",
+    "mongoose": "^4.4.15"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

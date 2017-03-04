@@ -1,0 +1,53 @@
+.full-width-image-cover-1 {
+	background: url("http://lorempixel.com/1200/600/food/") no-repeat center center;
+	background-size: cover;
+	text-align: center;
+	padding: 190px 0;
+  width: 85%;
+
+    /*This is for the centering stuff*/
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#welcome{
+    margin: 4%;
+}
+
+.h-center{
+    text-align: center;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+.container {
+  width: auto;
+  max-width: 1000px;
+  padding: 0 15px;
+}
+.container .text-muted {
+  margin: 20px 0;
+}
