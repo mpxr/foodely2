@@ -1,49 +1,70 @@
 var express = require('express')
+var path = require('path')
+var passport = require('passport')
+var session = require('express-session')
+var bodyParser = require('body-parser')
+var helmet = require('helmet')
+
+require('dotenv').config()
+
+var home = require('./routes/home')
+var menu = require('./routes/menu')
+var order = require('./routes/order')
+var register = require('./routes/register')
+var login = require('./routes/login')
+var admin = require('./routes/admin')
+var api = require('./routes/api')
+
 var app = express()
 
-var session = require("express-session")
-var bodyParser = require("body-parser")
-
-app.use(express.static('public'))
+app.use(helmet())
+app.use(express.static(path.join(__dirname, 'public')))
 
 app.set("view engine", "ejs")
 
-app.use(session({
-    secret: "dirty little secret of mine",
-    cookie: {
-        maxAge: 60000
-    },
-    resave: true,
-    saveUninitialized: false
-}))
-
-// for parsing application/json
+app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(bodyParser.json())
-// for parsing application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({
     extended: true
 }))
 
-app.use(function (req, res, next) {
-    res.tpl = {},
-        res.tpl.error = []
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true
+}))
 
-    return next()
+app.use(passport.initialize())
+app.use(passport.session())
+
+app.use('/', home)
+app.use('/menu', menu)
+app.use('/order', order)
+app.use('/register', register)
+app.use('/login', login)
+app.use('/admin', admin)
+app.use('/api', api)
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 })
 
-require('./routes/home')(app)
-require('./routes/menu')(app)
-require('./routes/order')(app)
-require('./routes/register')(app)
-require('./routes/login')(app)
-require('./routes/admin')(app)
+// error handler
+app.use(function(err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-app.use(function (err, req, res, next) {
-    res.status(500).send("Oh boi, something bad happened...")
-
-    console.error(err.stack)
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
 })
 
 var server = app.listen(3000, function(){
-    console.log("Hello from /3000")
+    console.log("Express server from /3000")
 })
+
+module.exports = app

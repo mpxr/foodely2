@@ -29,6 +29,7 @@ body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
 }
+
 .footer {
   position: absolute;
   bottom: 0;
@@ -67,4 +68,8 @@ body {
 
 .margin-left-1{
   margin-left: 1%;
+}
+
+a {
+  color: #00B7FF;
 }

@@ -1,19 +1,23 @@
 {
-  "name": "foodely2",
+  "name": "Foodely 2",
   "version": "1.0.0",
   "description": "foodely2",
   "main": "index.js",
   "dependencies": {
-    "express": "^4.15.0",
     "body-parser": "^1.15.1",
+    "dotenv": "^4.0.0",
     "ejs": "^2.4.1",
+    "express": "^4.15.0",
     "express-session": "^1.13.0",
-    "mongoose": "^4.4.15"
+    "helmet": "^3.5.0",
+    "mongoose": "^4.4.15",
+    "morgan": "^1.6.1",
+    "passport": "^0.3.2",
+    "passport-local": "^0.1.6"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Marton Veto"
 }
