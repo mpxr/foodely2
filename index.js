@@ -9,11 +9,12 @@ require('dotenv').config()
 
 var home = require('./routes/home')
 var menu = require('./routes/menu')
+var food = require('./routes/food')
 var order = require('./routes/order')
 var register = require('./routes/register')
 var login = require('./routes/login')
 var admin = require('./routes/admin')
-var api = require('./routes/api')
+var auth = require('./routes/auth')
 
 var app = express()
 
@@ -40,10 +41,11 @@ app.use(passport.session())
 app.use('/', home)
 app.use('/menu', menu)
 app.use('/order', order)
+app.use('/food', food)
 app.use('/register', register)
 app.use('/login', login)
 app.use('/admin', admin)
-app.use('/api', api)
+app.use('/auth', auth)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
