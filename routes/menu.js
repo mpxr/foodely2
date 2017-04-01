@@ -9,13 +9,12 @@ var findMenuItemByDateMW = require('../middleware/menu-item/findMenuItemByDate')
 var updateMenuItemMW = require('../middleware/menu-item/updateMenuItem')
 var deleteMenuItemMW = require('../middleware/menu-item/deleteMenuItem')
 var getCurrentWeekMW = require('../middleware/common/getCurrentWeek')
+var renderMW = require("../middleware/common/renderMW")
 
 var MenuItem = require('../model/MenuItem')
 var Food = require('../model/Food')
 
-router.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, '../public/html', '/menu.html'))
-})
+router.get('/', authMW(objectRepository), findMenuItemByDateMW(objectRepository), renderMW("menu"))
 
 var objectRepository = {
     menuItem: MenuItem,
@@ -33,11 +32,6 @@ router.post('', authMW(objectRepository), createMenuItemMW(objectRepository))
 router.get('/week', authMW(objectRepository),
     getCurrentWeekMW(),
     findMenuItemByWeekMW(objectRepository))
-
-/**
- * Find Menu Items by date
- */
-router.get('/date', authMW(objectRepository), findMenuItemByDateMW(objectRepository))
 
 /**
  * Edit Menu Item

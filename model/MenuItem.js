@@ -2,8 +2,7 @@ var Food = require('../model/Food')
 
 var MenuItem = {
     foods: [Food],
-    date: Date,
-    price: Number
+    date: Date
 }
 
 module.exports = MenuItem

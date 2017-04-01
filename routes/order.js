@@ -9,6 +9,7 @@ var findOrdersByWeekMW = require('../middleware/order/findOrdersByWeek')
 var editOrderMW = require('../middleware/order/editOrder')
 var deleteOrderMW = require('../middleware/order/deleteOrder')
 var getCurrentWeekMW = require('../middleware/common/getCurrentWeek')
+var renderMW = require("../middleware/common/renderMW")
 
 var MenuItem = require('../model/MenuItem')
 var User = require('../model/User')
@@ -18,34 +19,34 @@ var objectRepository = {
     user: User
 };
 
-router.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, '../public/html', '/order.html'))
-})
+router.get('/', findOrdersByWeekMW(objectRepository), renderMW("order"))
 
 /**
- * Find Order by week number
+ * Find OrderItem by week number
  */
 router.get('/find', authMW(objectRepository),
     getCurrentWeekMW(),
     findOrdersByWeekMW(objectRepository))
 
 /**
- * Find Order by date
+ * Find OrderItem by date
  */
-router.get('/find', authMW(objectRepository), findOrderByDate(objectRepository))
+router.get('/find', authMW(objectRepository), findOrdersByWeekMW(objectRepository), function(req, res){
+    res.send(req.tpl)
+})
 
 /**
- * Create a new Order
+ * Create a new OrderItem
  */
 router.post('', authMW(objectRepository), createOrderMW(objectRepository))
 
 /**
- * Edit Order
+ * Edit OrderItem
  */
 router.put('', authMW(objectRepository), editOrderMW(objectRepository))
 
 /**
- * Delete Order
+ * Delete OrderItem
  */
 router.delete('', authMW(objectRepository), deleteOrderMW(objectRepository))
 

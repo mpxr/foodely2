@@ -1,0 +1,76 @@
+<%- include('header', {active: "admin"}) -%>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>Admin felület</h1>
+        </div>
+
+        <div class="col-xs-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Menü hozzáadása és szerkesztése</div>
+                <div class="panel-body">
+                    <form>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="exampleInputEmail1">Dátum</label>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <input type="text" id="datepicker" class="form-control" placeholder="Dátum">
+                                        </div>
+                                        <div class="col-xs-1">
+                                            <button class="btn btn-info">Keres</button>
+                                        </div>
+                                        <div class="col-xs-1">
+                                            <button class="btn btn-danger">Étel törlése</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="exampleInputEmail1">Étel neve</label>
+                                    <input type="text" class="form-control" placeholder="Étel neve">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="exampleInputEmail1">Allergének</label>
+                                    <input type="text" class="form-control" placeholder="Allergének">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="exampleInputEmail1">Hozzávalók</label>
+                                    <input type="text" class="form-control" placeholder="Hozzávalók">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="exampleInputEmail1">Ár</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Ár">
+                                        <div class="input-group-addon">Ft</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-default">Hozzáad</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<%- include('footer') -%>

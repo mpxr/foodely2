@@ -6,10 +6,11 @@
   "dependencies": {
     "body-parser": "^1.15.1",
     "dotenv": "^4.0.0",
-    "ejs": "^2.4.1",
+    "ejs": "^2.5.6",
     "express": "^4.15.0",
     "express-session": "^1.13.0",
     "helmet": "^3.5.0",
+    "moment": "^2.18.1",
     "mongoose": "^4.4.15",
     "morgan": "^1.6.1",
     "passport": "^0.3.2",

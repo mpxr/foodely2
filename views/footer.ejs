@@ -1,0 +1,32 @@
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted">
+        <ul class="list-unstyled">
+            <li class="margin-bottom-1"><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>
+                Telefonszám: +36 123 4567
+            </li>
+            <li class="margin-bottom-1"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Cím: Budapest,
+                1111, Finom utca 89.
+            </li>
+        </ul>
+        </p>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+        $("#format").on("change", function () {
+            $("#datepicker").datepicker({ dateFormat: 'yy-mm-dd' });
+        });
+    });
+</script>
+
+</body>
+
+</html>

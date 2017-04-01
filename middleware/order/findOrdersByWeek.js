@@ -1,3 +1,5 @@
+var MockOrder = require('../mock/MockOrder')
+
 /**
  * Get Orders by week
  * @param objectrepository
@@ -6,7 +8,9 @@
 module.exports = function (objectrepository) {
 
     return function (req, res, next) {
-        return next();
+        var week = req.query.week;
+        req.tpl = MockOrder.findByWeek(week)
+        next()
     };
 
 };

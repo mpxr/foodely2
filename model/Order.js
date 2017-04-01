@@ -1,9 +1,8 @@
-var User = require('../model/User')
-var Food = require('../model/Food')
+var OrderItem = require('../model/OrderItem')
 
-Order ={
-    user: User,
-    food: Food
+var Order = {
+    orderItem: [OrderItem],
+    weekNumber: Number
 }
 
 module.exports = Order
