@@ -7,7 +7,7 @@ var createUserMW= require('../middleware/user/checkUserRegistration')
 var User = require('../model/User')
 
 var objectRepository = {
-    user: User
+    userModel: User
 };
 
 router.get('/', function (req, res) {

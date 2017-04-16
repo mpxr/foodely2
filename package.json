@@ -5,16 +5,18 @@
   "main": "index.js",
   "dependencies": {
     "body-parser": "^1.15.1",
+    "compression": "^1.6.2",
     "dotenv": "^4.0.0",
     "ejs": "^2.5.6",
     "express": "^4.15.0",
     "express-session": "^1.13.0",
     "helmet": "^3.5.0",
     "moment": "^2.18.1",
-    "mongoose": "^4.4.15",
+    "mongoose": "^4.9.4",
     "morgan": "^1.6.1",
     "passport": "^0.3.2",
-    "passport-local": "^0.1.6"
+    "passport-local": "^0.1.6",
+    "winston": "^2.3.1"
   },
   "devDependencies": {},
   "scripts": {

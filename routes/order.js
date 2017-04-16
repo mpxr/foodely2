@@ -12,14 +12,16 @@ var getCurrentWeekMW = require('../middleware/common/getCurrentWeek')
 var renderMW = require("../middleware/common/renderMW")
 
 var MenuItem = require('../model/MenuItem')
+var OrderItem = require('../model/OrderItem')
 var User = require('../model/User')
 
 var objectRepository = {
     menuItem: MenuItem,
+    orderItemModel: OrderItem,
     user: User
 };
 
-router.get('/', findOrdersByWeekMW(objectRepository), renderMW("order"))
+router.get('/', getCurrentWeekMW(), findOrdersByWeekMW(objectRepository), renderMW("order"))
 
 /**
  * Find OrderItem by week number

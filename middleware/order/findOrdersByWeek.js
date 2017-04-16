@@ -1,4 +1,4 @@
-var MockOrder = require('../mock/MockOrder')
+var requireOption = require('../common').requireOption
 
 /**
  * Get Orders by week
@@ -7,10 +7,13 @@ var MockOrder = require('../mock/MockOrder')
  */
 module.exports = function (objectrepository) {
 
+    var MenuItemModel = requireOption(objectrepository, 'orderItemModel')
+
     return function (req, res, next) {
-        var week = req.query.week;
-        req.tpl = MockOrder.findByWeek(week)
-        next()
+        MenuItemModel.find({}, function(err, value){
+            req.tpl = value
+            return next()
+        })
     };
 
 };

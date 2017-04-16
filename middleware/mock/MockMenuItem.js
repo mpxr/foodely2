@@ -1,7 +1,7 @@
 var MenuItem = require('../../model/MenuItem')
 var Menu = require('../../model/Menu')
 var Food = require('../../model/Food')
-var moment = require('moment');
+var moment = require('moment')
 
 module.exports = {
 
@@ -13,7 +13,7 @@ module.exports = {
 
         var weekNumber;
         if (week === undefined) {
-            weekNumber = moment().week();
+            weekNumber = moment().week()
         } else{
             weekNumber = week
         }

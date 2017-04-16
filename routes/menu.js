@@ -4,34 +4,31 @@ var router = express.Router()
 
 var authMW = require('../middleware/common/auth')
 var createMenuItemMW = require('../middleware/menu-item/createMenuItem')
-var findMenuItemByWeekMW = require('../middleware/menu-item/findMenuByWeek')
+var findMenuItemMW = require('../middleware/menu-item/findMenuItem')
 var findMenuItemByDateMW = require('../middleware/menu-item/findMenuItemByDate')
 var updateMenuItemMW = require('../middleware/menu-item/updateMenuItem')
 var deleteMenuItemMW = require('../middleware/menu-item/deleteMenuItem')
 var getCurrentWeekMW = require('../middleware/common/getCurrentWeek')
 var renderMW = require("../middleware/common/renderMW")
+var findMenuMW = require('../middleware/menu/findMenu')
 
 var MenuItem = require('../model/MenuItem')
+var Menu = require('../model/Menu')
 var Food = require('../model/Food')
 
-router.get('/', authMW(objectRepository), findMenuItemByDateMW(objectRepository), renderMW("menu"))
-
 var objectRepository = {
-    menuItem: MenuItem,
-    food: Food
+    menuItemModel: MenuItem,
+    foodModel: Food,
+    menuModel: Menu
 };
+
+router.get('/', authMW(objectRepository), getCurrentWeekMW(), findMenuMW(objectRepository),
+    findMenuItemMW(objectRepository), renderMW("menu"))
 
 /**
  * Create a new Menu Item
  */
 router.post('', authMW(objectRepository), createMenuItemMW(objectRepository))
-
-/**
- * Find Menu Items by week number
- */
-router.get('/week', authMW(objectRepository),
-    getCurrentWeekMW(),
-    findMenuItemByWeekMW(objectRepository))
 
 /**
  * Edit Menu Item

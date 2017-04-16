@@ -4,34 +4,41 @@ var router = express.Router()
 
 var authMW = require('../middleware/common/auth')
 var createFoodMW = require('../middleware/food/createFood')
-var findFoodMW = require('../middleware/food/findFood')
 var editFoodMW = require('../middleware/food/editFood')
 var deleteFoodMW = require('../middleware/food/deleteFood')
+var createMenuItemMW = require('../middleware/menu-item/createMenuItem')
+var createMenuMW = require('../middleware/menu/createMenu')
 
-var Food = require('../model/Food')
+var renderMW = require("../middleware/common/renderMW")
+
+var MenuItem = require('../model/MenuItem')
+var FoodModel = require('../model/Food')
+var MenuModel = require('../model/Menu')
 
 var objectRepository = {
-    food: Food
+    menuItemModel: MenuItem,
+    foodModel: FoodModel,
+    menuModel: MenuModel
 };
 
 /**
  * Find Food by name
  */
-router.get('', authMW(objectRepository), findFoodMW(objectRepository))
+//router.get('/', authMW(objectRepository))
 
 /**
  * Create a new Food
  */
-router.post('', authMW(objectRepository), createFoodMW(objectRepository))
+router.post('/', authMW(objectRepository), createFoodMW(objectRepository), createMenuItemMW(objectRepository), createMenuMW(objectRepository))
 
 /**
  * Edit Food
  */
-router.put('', authMW(objectRepository), editFoodMW(objectRepository))
+//router.put('', authMW(objectRepository), editFoodMW(objectRepository))
 
 /**
  * Delete Food
  */
-router.delete('', authMW(objectRepository), deleteFoodMW(objectRepository))
+//router.delete('', authMW(objectRepository), deleteFoodMW(objectRepository))
 
 module.exports = router

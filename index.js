@@ -4,6 +4,8 @@ var passport = require('passport')
 var session = require('express-session')
 var bodyParser = require('body-parser')
 var helmet = require('helmet')
+var compression = require('compression')
+var winston = require('winston')
 
 require('dotenv').config()
 
@@ -19,11 +21,13 @@ var auth = require('./routes/auth')
 var app = express()
 
 app.use(helmet())
+app.use(compression())
+
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.set("view engine", "ejs")
 
-app.use(require('body-parser').urlencoded({ extended: true }))
+app.use(require('body-parser').urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
     extended: true
@@ -48,14 +52,14 @@ app.use('/admin', admin)
 app.use('/auth', auth)
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
 })
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message
     res.locals.error = req.app.get('env') === 'development' ? err : {}
@@ -65,8 +69,8 @@ app.use(function(err, req, res, next) {
     res.render('error')
 })
 
-var server = app.listen(3000, function(){
-    console.log("Express server from /3000")
+var server = app.listen(3000, function () {
+    winston.info("Express server from /3000")
 })
 
 module.exports = app

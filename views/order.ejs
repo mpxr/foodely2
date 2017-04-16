@@ -6,9 +6,12 @@
             <h1>Rendeléseim</h1>
         </div>
         <div class="col-xs-12">
-            <h2><%=data.weekNumber%>. hét
-                <small><%=moment().weeks(data.weekNumber).weekday(0).format("MMM Do")%> - <%= moment().weeks(data.weekNumber).weekday(4).format("MMM Do") %></small>
+            <% if(data.weekNumber){ %>
+            <h2><%= data.weekNumber %>. hét
+                <small><%= moment().weeks(data.weekNumber).weekday(0).format("MMM Do") %>
+                    - <%= moment().weeks(data.weekNumber).weekday(4).format("MMM Do") %></small>
             </h2>
+            <% } %>
         </div>
         <div class="col-xs-12 margin-bottom-1">
                 <span><a href="#"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Előző hét</a>
@@ -19,18 +22,20 @@
         </div>
     </div>
 
-    <% data.orderItem.forEach(function(order){ %>
+    <% data.forEach(function(order){ %>
 
     <div class="row">
         <div class="col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h3><%=moment(order.date).format("dddd")%> <small><%=moment(order.date).format("MMM Do")%></small></h3>
+                    <h3><%= moment(order.date).format("dddd") %>
+                        <small><%= moment(order.date).format("MMM Do") %></small>
+                    </h3>
                     <ul class="list-unstyled">
                         <li>
                             <div>
-                                    <span class="inline">
-                                    <%=order.food.name%>
+                                <span class="inline">
+                                    <%= order.food.name %>
                                 </span>
                                 <span class="btn-group pull-right">
                                         <button type="button" class="btn btn-sm btn-info">Szerkesztés</button>

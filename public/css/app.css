@@ -35,14 +35,10 @@ body {
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
-  height: 100px;
+  /*height: 100px;*/
   background-color: #f5f5f5;
 }
 
-
-/* Custom page CSS
--------------------------------------------------- */
-/* Not required for template or sticky footer method. */
 
 .container {
   width: auto;
@@ -53,6 +49,9 @@ body {
   margin: 20px 0;
 }
 
+.main-container {
+  margin-bottom: 6%;
+}
 
 .margin-bottom-1{
   margin-bottom: 1%;

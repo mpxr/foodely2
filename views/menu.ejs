@@ -1,4 +1,4 @@
-<%- include('header', {active: "menu"}) -%>
+<%- include('header', {active: "menu"}) %>
 
 <div class="container">
     <div class="row">
@@ -6,55 +6,70 @@
             <h1>Étlap</h1>
         </div>
         <div class="col-xs-12">
-            <h2><%=data.week%>. hét
-                <small><%=moment().weeks(data.week).weekday(0).format("MMM Do")%> - <%= moment().weeks(data.week).weekday(4).format("MMM Do") %></small>
+            <% if(data){ %>
+            <% week = Number(moment(data[0].date).week()) %>
+            <h2><%= week %>. hét
+                <small><%= moment().weeks(week).weekday(0).format("MMM Do") %>
+                    - <%= moment().weeks(week).weekday(4).format("MMM Do") %></small>
             </h2>
+            <% } %>
         </div>
 
-        <%week = Number(data.week)%>
 
         <div class="col-xs-12 margin-bottom-1">
                 <span>
                     <a href="/menu?week=12">
                         <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Előző hét</a>
                 </span>
-                <span class="margin-left-1">
+            <span class="margin-left-1">
                     <a href="/menu?week=14">Következő hét <span class="glyphicon glyphicon-menu-right"
-                                                                        aria-hidden="true"></span></a>
+                                                                aria-hidden="true"></span></a>
                 </span>
         </div>
     </div>
 
-    <% data.menuItem.forEach(function(menuItem){ %>
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3><%=moment(menuItem.date).format("dddd")%> <small><%=moment(menuItem.date).format("MMM Do")%></small></h3>
-                </div>
-                <div class="panel-body">
-                    <ul class="list-unstyled">
-                        <%menuItem.foods.forEach(function(food){%>
-                        <li>
-                            <span class="label label-info pull-right"><%=food.price%> Ft</span>
-                            <label><input type="checkbox"> <%=food.name%></label>
-                            <p>Allergének: <%food.allergens.forEach(function(allergen){%> <%= allergen %>  <%})%></p>
-                        </li>
-                        <%})%>
-                    </ul>
+    <% if(data){ %>
+        <% data.forEach(function(menuItem){ %>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3><%= moment(menuItem.date).format("dddd") %>
+                            <small><%= moment(menuItem.date).format("MMM Do") %></small>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="list-unstyled">
+                            <% menuItem.foods.forEach(function(food){ %>
+                            <li>
+                                <span class="label label-info pull-right"><%= food.price %> Ft</span>
+                                <label><input type="checkbox"> <%= food.name %></label>
+                                <p>Allergének:
+                                    <% food.allergens.forEach(function(allergen){ %>
+                                    <%= allergen %>
+                                    <% }) %>
+                                </p>
+                            </li>
+                            <% }) %>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <%}) %>
+        <% }) %>
+    <% } %>
+    <% if(!data){ %>
+    <div class="alert alert-warning" role="alert">Nincs menü erre a hétre. :(</div>
+    <% } %>
 
-
+    <% if(data){ %>
     <div class="row">
         <div class="text-center margin-bottom-5 margin-top-3">
             <button type="button" class="btn btn-primary btn-lg">Megrendel</button>
         </div>
     </div>
+    <% } %>
 
 </div>
 
-<%- include('footer') -%>
+<%- include('footer') %>
