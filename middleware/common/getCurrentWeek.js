@@ -7,8 +7,7 @@ var moment = require('moment')
 module.exports = function () {
 
     return function (req, res, next) {
-        var week = moment().week()
-        req.week = week
+        req.week = moment().week()
         return next()
     };
 

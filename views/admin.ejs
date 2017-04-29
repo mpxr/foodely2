@@ -16,14 +16,8 @@
                                     <label for="exampleInputEmail1">Dátum</label>
                                     <div class="row">
                                         <div class="col-xs-6">
-                                            <input type="text" id="datepicker" name="date" id="date"
+                                            <input type="text" id="datepicker" name="date"
                                                    class="form-control" placeholder="Dátum">
-                                        </div>
-                                        <div class="col-xs-1">
-                                            <button class="btn btn-info">Keres</button>
-                                        </div>
-                                        <div class="col-xs-1">
-                                            <button class="btn btn-danger">Étel törlése</button>
                                         </div>
                                     </div>
                                 </div>
@@ -73,8 +67,83 @@
                 </div>
             </div>
         </div>
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Keres</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control" name="searchName" id="searchName"
+                                   placeholder="Keresendő étel neve">
+                        </div>
+                        <div class="col-xs-4">
+                            <button class="btn btn-info" id="search">Keres</button>
+                            <button class="btn btn-primary" id="modify">Módosít</button>
+                            <button class="btn btn-danger" id="delete">Étel törlése</button>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-xs-12" id="noFood"></div>
+                        <div class="col-xs-12">
+                            <div id="foundFoods">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type='text/javascript'>
+    $('#search').click(function () {
+        var foodName = $("#searchName").val();
+        $.get('/food', {foodName: foodName})
+            .done(function (food) {
+                if (food === '') {
+                    $("#noFood").append("<p>Nem található a keresett étel.</p>");
+                } else {
+                    $("#foundFoods").append(
+                        "<p>" +
+                        "<h3>" + food.name + "</h3>" +
+                        "<input type='text' class='form-control' placeholder='Allergének (módosít)' value=" + food.allergens + " id='modifyAllergens'>" +
+                        "<input type='text' class='form-control' placeholder='Hozzávalók (módosít)' value=" + food.ingredients + " id='modifyIngredients'>" +
+                        "<input type='text' class='form-control' placeholder='Ár (módosít)' value=" + food.price + " id='modifyPrice'>" +
+                        "</p>")
+                }
+            })
+    });
+    $('#modify').click(function () {
+        var foodName = $("#searchName").val();
+        var allergenToModify = $("#modifyAllergens").val();
+        var modifyIngredients = $("#modifyIngredients").val();
+        var modifyPrice = $("#modifyPrice").val();
+        $.ajax({
+            url: "/food",
+            type: "PUT",
+            data: {foodName: foodName, allergens: allergenToModify, ingredients: modifyIngredients, price: modifyPrice}
+        })
+            .done(function () {
+                window.location.replace("/admin");
+            })
+    });
+    $('#delete').click(function () {
+        var foodName = $("#searchName").val();
+        $.ajax({
+            url: "/food",
+            type: "DELETE",
+            data: {foodName: foodName}
+        })
+            .done(function () {
+                window.location.replace("/admin");
+            })
+    });
+</script>
 
 <%- include('footer') %>

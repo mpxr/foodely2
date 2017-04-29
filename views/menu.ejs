@@ -43,7 +43,7 @@
                             <% menuItem.foods.forEach(function(food){ %>
                             <li>
                                 <span class="label label-info pull-right"><%= food.price %> Ft</span>
-                                <label><input type="checkbox"> <%= food.name %></label>
+                                <label><input type="checkbox" class="selectedFood" value="<%= JSON.stringify({foodName: food.name, date: menuItem.date}) %>"> <%= food.name %></label>
                                 <p>Allergének:
                                     <% food.allergens.forEach(function(allergen){ %>
                                     <%= allergen %>
@@ -65,11 +65,27 @@
     <% if(data){ %>
     <div class="row">
         <div class="text-center margin-bottom-5 margin-top-3">
-            <button type="button" class="btn btn-primary btn-lg">Megrendel</button>
+            <button id="orderButton" type="button" class="btn btn-primary btn-lg">Megrendel</button>
         </div>
     </div>
     <% } %>
 
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type='text/javascript'>
+    $('#orderButton').click(function() {
+        var selected = $('.selectedFood:checkbox:checked');
+        var food = [];
+        selected.each(function(){
+            food.push($(this).val());
+        });
+        $.post("/order", {food: food})
+            .done(function(){
+                window.location.replace("/order")
+            });
+    });
+</script>
+
 
 <%- include('footer') %>

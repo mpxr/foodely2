@@ -7,13 +7,15 @@ var requireOption = require('../common').requireOption
  */
 module.exports = function (objectrepository) {
 
-    var MenuItemModel = requireOption(objectrepository, 'orderItemModel')
+    var OrderItemModel = requireOption(objectrepository, 'orderItemModel')
 
     return function (req, res, next) {
-        MenuItemModel.find({}, function(err, value){
-            req.tpl = value
-            return next()
-        })
+        OrderItemModel.find({})
+            .populate('food')
+            .exec(function (err, order) {
+                req.tpl = order
+                return next()
+            })
     };
 
 };

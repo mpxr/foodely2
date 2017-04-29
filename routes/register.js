@@ -3,6 +3,7 @@ var express = require('express')
 var router = express.Router()
 
 var createUserMW= require('../middleware/user/checkUserRegistration')
+var renderMW = require("../middleware/common/renderMW")
 
 var User = require('../model/User')
 
@@ -10,13 +11,11 @@ var objectRepository = {
     userModel: User
 };
 
-router.get('/', function (req, res) {
-    res.render("register")
-})
+router.get('/', renderMW("register"))
 
 /**
  * Create new User
  */
-router.post('', createUserMW(objectRepository))
+router.post('', createUserMW(objectRepository), renderMW("register"))
 
 module.exports = router

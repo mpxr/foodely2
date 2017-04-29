@@ -7,7 +7,6 @@ module.exports = function (viewName) {
     moment.locale("hu")
 
     return function (req, res) {
-
         res.render(viewName, {data: req.tpl, moment: moment});
     };
 

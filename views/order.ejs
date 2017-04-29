@@ -38,8 +38,12 @@
                                     <%= order.food.name %>
                                 </span>
                                 <span class="btn-group pull-right">
-                                        <button type="button" class="btn btn-sm btn-info">Szerkesztés</button>
-                                        <button type="button" class="btn btn-sm btn-danger">Lemond</button>
+                                        <button type="button"
+                                                class="btn btn-sm btn-danger deleteOrder"
+                                                value="<%= JSON.stringify({
+                                                    foodName: order.food.name,
+                                                    date: order.date
+                                                }) %>">Lemond</button>
                                 </span>
                             </div>
                         </li>
@@ -53,5 +57,20 @@
     <% }) %>
 
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type='text/javascript'>
+    $('.deleteOrder').click(function () {
+        var deletedOrder = $('.deleteOrder');
+        $.ajax({
+            url: '/order',
+            type: 'DELETE',
+            data: {orderToDelete: deletedOrder.val()}
+        })
+            .done(function () {
+                window.location.replace("/order");
+            })
+    });
+</script>
 
 <%- include('footer') %>

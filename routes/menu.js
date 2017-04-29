@@ -5,9 +5,6 @@ var router = express.Router()
 var authMW = require('../middleware/common/auth')
 var createMenuItemMW = require('../middleware/menu-item/createMenuItem')
 var findMenuItemMW = require('../middleware/menu-item/findMenuItem')
-var findMenuItemByDateMW = require('../middleware/menu-item/findMenuItemByDate')
-var updateMenuItemMW = require('../middleware/menu-item/updateMenuItem')
-var deleteMenuItemMW = require('../middleware/menu-item/deleteMenuItem')
 var getCurrentWeekMW = require('../middleware/common/getCurrentWeek')
 var renderMW = require("../middleware/common/renderMW")
 var findMenuMW = require('../middleware/menu/findMenu')
@@ -22,23 +19,14 @@ var objectRepository = {
     menuModel: Menu
 };
 
-router.get('/', authMW(objectRepository), getCurrentWeekMW(), findMenuMW(objectRepository),
+router.get('/', authMW(), getCurrentWeekMW(), findMenuMW(objectRepository),
     findMenuItemMW(objectRepository), renderMW("menu"))
 
 /**
  * Create a new Menu Item
  */
-router.post('', authMW(objectRepository), createMenuItemMW(objectRepository))
+router.post('', authMW(), createMenuItemMW(objectRepository))
 
-/**
- * Edit Menu Item
- */
-router.put('', authMW(objectRepository), updateMenuItemMW(objectRepository))
-
-/**
- * Delete Menu Item
- */
-router.delete('', authMW(objectRepository), deleteMenuItemMW(objectRepository))
 
 
 module.exports = router

@@ -1,7 +1,6 @@
 var User = require('../../model/Food')
 var Food = require('../../model/Food')
 var OrderItem = require('../../model/OrderItem')
-var Order = require('../../model/Order')
 var moment = require('moment')
 
 module.exports = {

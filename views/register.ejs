@@ -1,4 +1,4 @@
-<%- include('header', {active: "register"}) -%>
+<%- include('header', {active: "register"}) %>
 
 <div class="container main-container">
     <div class="row">
@@ -8,7 +8,10 @@
     </div>
     <div class="row">
         <div class="col-xs-12">
-            <form>
+            <% if(data){ %>
+            <%= data %>
+            <% } %>
+            <form method="post" action="/register">
                 <div class="form-group">
                     <div class="row">
                         <div class="form-group col-lg-6">
@@ -71,4 +74,4 @@
     </div>
 </div>
 
-<%- include('footer') -%>
+<%- include('footer') %>
