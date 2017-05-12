@@ -24,7 +24,7 @@ module.exports = function (objectrepository) {
         foodModel.price = req.body.price
         foodModel.save(function(err){
             if(err){
-                winston.error(errs)
+                winston.error(err)
             }
             req.food = foodModel
             return next()

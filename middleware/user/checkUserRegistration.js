@@ -6,7 +6,7 @@ var requireOption = require('../common').requireOption
  * @param objectrepository
  * @returns {Function}
  */
-module.exports = function (objectrepository) {
+    module.exports = function (objectrepository) {
 
     var UserModel = requireOption(objectrepository, 'userModel')
 
